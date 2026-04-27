@@ -1,0 +1,109 @@
+/* ─── Tournament Bracket Admin Styles ─────────────────────────────────────── */
+
+#tb-rounds-editor {
+  margin-bottom: 8px;
+}
+
+.tb-round {
+  border: 1px solid #c3c4c7;
+  border-radius: 3px;
+  background: #f6f7f7;
+  padding: 16px;
+  margin-bottom: 14px;
+}
+
+.tb-round-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #dcdcde;
+}
+
+.tb-round-header h3 {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 600;
+  color: #1d2327;
+}
+
+.tb-match {
+  background: #fff;
+  border: 1px solid #dcdcde;
+  border-radius: 3px;
+  padding: 12px 14px;
+  margin-bottom: 8px;
+}
+
+.tb-match-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #646970;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tb-remove-match {
+  color: #b32d2e !important;
+  text-decoration: none !important;
+  font-size: 14px;
+  line-height: 1;
+  cursor: pointer;
+  border: none;
+  background: none;
+  padding: 0;
+}
+.tb-remove-match:hover {
+  color: #8a2020 !important;
+}
+
+.tb-team-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+  flex-wrap: wrap;
+}
+
+.tb-team-label {
+  width: 50px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #646970;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  flex-shrink: 0;
+}
+
+.tb-field.small-text {
+  width: 56px !important;
+}
+
+.tb-winner-label {
+  font-size: 12px;
+  color: #2271b1;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.tb-winner-label input[type="radio"] {
+  margin-right: 3px;
+}
+
+.tb-divider {
+  height: 1px;
+  background: #f0f0f1;
+  margin: 6px 0 10px;
+}
+
+@media screen and (max-width: 600px) {
+  .tb-team-row {
+    flex-wrap: wrap;
+  }
+  .tb-field.regular-text {
+    width: 120px !important;
+  }
+}
