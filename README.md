@@ -34,5 +34,8 @@ http://www.phildesigns.com/
 
 ## Changelog 
 
+Version 1.1.0
+• Changed trophy emoji to svg image.
+
 Version 1.0.0
 • Initial release.
