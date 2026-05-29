@@ -34,8 +34,10 @@ http://www.phildesigns.com/
 
 ## Changelog 
 
-Version 1.1.0
-• Changed trophy emoji to svg image.
+Version 1.2.0
+• Added ability to deselect a match winner via a "Clear winner" button — previously radio buttons could not be unchecked once set.
+• Added optional match label: a short text header displayed above the match card on the frontend.
+• Added optional color accent per match: a color picker (toggled by a checkbox) applies a colored left-border stripe to the match card on the frontend.
 
 Version 1.0.0
 • Initial release.
