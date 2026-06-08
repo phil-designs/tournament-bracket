@@ -109,6 +109,24 @@ class TB_Admin {
 		if ( isset( $_POST['tb_rounds'] ) ) {
 			$raw    = wp_unslash( $_POST['tb_rounds'] );
 			$rounds = json_decode( $raw, true );
+        // Sanitize: replace any non-associative team arrays with empty objects
+        if ( is_array( $rounds ) ) {
+            foreach ( $rounds as &$round ) {
+                if ( is_array( $round ) ) {
+                    foreach ( $round as &$match ) {
+                        if ( is_array( $match ) ) {
+                            foreach ( [ 'top', 'bottom' ] as $side ) {
+                                if ( isset( $match[ $side ] ) && array_values( (array) $match[ $side ] ) === (array) $match[ $side ] ) {
+                                    $match[ $side ] = [];
+                                }
+                            }
+                        }
+                    }
+                    unset( $match );
+                }
+            }
+            unset( $round );
+        }
 			if ( is_array( $rounds ) ) {
 				update_post_meta( $post_id, '_tb_rounds', wp_json_encode( $rounds ) );
 			}

@@ -143,7 +143,7 @@
 
 		// Team rows
 		['top', 'bottom'].forEach(function (side, sideIndex) {
-			var team      = (match[side] && typeof match[side] === 'object') ? match[side] : {};
+			var team      = (match[side] && typeof match[side] === 'object' && !Array.isArray(match[side])) ? match[side] : {};
 			var sideLabel = side === 'top' ? 'Team A' : 'Team B';
 			var radioName = 'tb_winner_' + rIndex + '_' + mIndex;
 
@@ -227,7 +227,7 @@
 	function ensurePath(rIndex, mIndex, side) {
 		if (!rounds[rIndex])             rounds[rIndex] = [];
 		if (!rounds[rIndex][mIndex])     rounds[rIndex][mIndex] = { top: {}, bottom: {} };
-		if (!rounds[rIndex][mIndex][side]) rounds[rIndex][mIndex][side] = {};
+		if (!rounds[rIndex][mIndex][side] || Array.isArray(rounds[rIndex][mIndex][side])) rounds[rIndex][mIndex][side] = {};
 		return rounds[rIndex][mIndex][side];
 	}
 
