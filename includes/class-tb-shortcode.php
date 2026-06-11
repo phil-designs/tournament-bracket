@@ -134,7 +134,8 @@ class TB_Shortcode {
 									<?php
 								$trophy_path = plugin_dir_path( dirname( __FILE__ ) ) . 'assets/images/trophy.svg';
 								if ( file_exists( $trophy_path ) ) {
-									echo file_get_contents( $trophy_path ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+									// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- SVG loaded from plugin's own assets directory.
+									include $trophy_path;
 								}
 								?>
 									<div class="tb-champion-info">

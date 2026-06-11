@@ -103,11 +103,11 @@ class TB_Admin {
 		if ( ! current_user_can( 'edit_post', $post_id ) ) return;
 
 		if ( isset( $_POST['tb_theme'] ) ) {
-			update_post_meta( $post_id, '_tb_theme', sanitize_text_field( $_POST['tb_theme'] ) );
+			update_post_meta( $post_id, '_tb_theme', sanitize_text_field( wp_unslash( $_POST['tb_theme'] ) ) );
 		}
 
 		if ( isset( $_POST['tb_rounds'] ) ) {
-			$raw    = wp_unslash( $_POST['tb_rounds'] );
+			$raw    = wp_unslash( $_POST['tb_rounds'] ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- JSON string is decoded below and each individual field sanitized via the loop that follows.
 			$rounds = json_decode( $raw, true );
         // Sanitize: replace any non-associative team arrays with empty objects
         if ( is_array( $rounds ) ) {

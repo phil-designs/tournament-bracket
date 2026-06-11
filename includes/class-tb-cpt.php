@@ -44,7 +44,7 @@ class TB_CPT {
 
 	public function column_content( $col, $post_id ) {
 		if ( 'shortcode' === $col ) {
-			echo '<code>[tournament_bracket id="' . absint( $post_id ) . '"]</code>';
+			echo '<code>[tournament_bracket id="' . absint( $post_id ) . '"]</code>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- contains only static developer HTML and an absint-sanitized integer.
 		}
 		if ( 'theme' === $col ) {
 			$theme = get_post_meta( $post_id, '_tb_theme', true ) ?: 'dark';
