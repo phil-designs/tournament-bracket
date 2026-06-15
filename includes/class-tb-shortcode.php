@@ -94,21 +94,33 @@ class TB_Shortcode {
 										<?php if ( ! empty( $match['header'] ) ) : ?>
 											<div class="match-header"><?php echo esc_html( $match['header'] ); ?></div>
 										<?php endif; ?>
-										<div class="match-top team">
-											<span class="image"></span>
-											<?php if ( ! empty( $top['seed'] ) ) : ?>
-												<span class="seed"><?php echo esc_html( $top['seed'] ); ?></span>
+										<?php
+									$top_bye    = ! empty( $top['bye'] );
+									$bottom_bye = ! empty( $bottom['bye'] );
+									?>
+										<div class="match-top team<?php echo $top_bye ? ' tb-bye' : ''; ?>">
+											<?php if ( $top_bye ) : ?>
+												<span class="name"><?php esc_html_e( 'BYE WEEK', 'tournament-bracket' ); ?></span>
+											<?php else : ?>
+												<span class="image"></span>
+												<?php if ( ! empty( $top['seed'] ) ) : ?>
+													<span class="seed"><?php echo esc_html( $top['seed'] ); ?></span>
+												<?php endif; ?>
+												<span class="name"><?php echo esc_html( $top['name'] ?? '' ); ?></span>
+												<span class="score"><?php echo esc_html( $top['score'] ?? '' ); ?></span>
 											<?php endif; ?>
-											<span class="name"><?php echo esc_html( $top['name'] ?? '' ); ?></span>
-											<span class="score"><?php echo esc_html( $top['score'] ?? '' ); ?></span>
 										</div>
-										<div class="match-bottom team">
-											<span class="image"></span>
-											<?php if ( ! empty( $bottom['seed'] ) ) : ?>
-												<span class="seed"><?php echo esc_html( $bottom['seed'] ); ?></span>
+										<div class="match-bottom team<?php echo $bottom_bye ? ' tb-bye' : ''; ?>">
+											<?php if ( $bottom_bye ) : ?>
+												<span class="name"><?php esc_html_e( 'BYE WEEK', 'tournament-bracket' ); ?></span>
+											<?php else : ?>
+												<span class="image"></span>
+												<?php if ( ! empty( $bottom['seed'] ) ) : ?>
+													<span class="seed"><?php echo esc_html( $bottom['seed'] ); ?></span>
+												<?php endif; ?>
+												<span class="name"><?php echo esc_html( $bottom['name'] ?? '' ); ?></span>
+												<span class="score"><?php echo esc_html( $bottom['score'] ?? '' ); ?></span>
 											<?php endif; ?>
-											<span class="name"><?php echo esc_html( $bottom['name'] ?? '' ); ?></span>
-											<span class="score"><?php echo esc_html( $bottom['score'] ?? '' ); ?></span>
 										</div>
 										<div class="match-lines">
 											<div class="line one"></div>

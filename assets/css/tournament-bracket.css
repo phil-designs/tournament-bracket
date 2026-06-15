@@ -447,6 +447,27 @@
   background: #505b69;
 }
 
+/* ─── BYE slot ────────────────────────────────────────────────────────────── */
+
+.tb-container .team.tb-bye {
+  background: #f0c040 !important;
+  border-color: #c8960a !important;
+  color: #5a3d00 !important;
+  justify-content: center;
+  font-weight: 700;
+}
+
+.tb-container .team.tb-bye .image,
+.tb-container .team.tb-bye .seed,
+.tb-container .team.tb-bye .score {
+  display: none !important;
+}
+
+.tb-container .team.tb-bye .name {
+  padding-left: 0;
+  text-align: center;
+}
+
 /* ─── Empty state ─────────────────────────────────────────────────────────── */
 
 .tb-container .tb-empty {

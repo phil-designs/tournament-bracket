@@ -18,6 +18,7 @@ PhilDesigns Tournament Bracket lets you build and display single-elimination tou
 
 - Unlimited rounds and matches per bracket
 - Per-match fields: team name, seed, score, winner, optional header label, optional color accent
+- BYE slot support for uneven brackets — mark a team slot as BYE to display a highlighted "BYE WEEK" card and auto-advance the opponent
 - Champion display with trophy graphic when a final winner is selected
 - Three built-in themes: Dark, Light, Dark Trendy (or None)
 - Optional inline theme switcher via shortcode attribute
@@ -56,6 +57,9 @@ https://phildesigns.com
 ---
 
 ## Changelog
+
+### 1.3.0
+- Added BYE slot support for uneven brackets: mark any team slot as a BYE in the admin to display a "BYE WEEK" card (yellow highlight) and automatically advance the opposing team as the winner.
 
 ### 1.2.0
 - Added ability to deselect a match winner via a "Clear winner" button.

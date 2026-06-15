@@ -3,7 +3,7 @@
  * Plugin Name:       PhilDesigns Tournament Bracket
  * Plugin URI:        https://phildesigns.com
  * Description:       Responsive flexbox tournament brackets. Create and manage brackets from the admin, then embed with [tournament_bracket id="POST_ID"].
- * Version:           1.2.0
+ * Version:           1.3.0
  * Author:            PhilDesigns
  * Author URI:        https://phildesigns.com
  * License:           GPL-2.0-or-later
@@ -17,7 +17,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'TB_VERSION',    '1.2.0' );
+define( 'TB_VERSION',    '1.3.0' );
 define( 'TB_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'TB_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 
