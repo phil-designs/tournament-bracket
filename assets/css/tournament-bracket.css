@@ -447,6 +447,7 @@
   background: #505b69;
 }
 
+<<<<<<< HEAD
 /* ─── Centered BYE column ─────────────────────────────────────────────────── */
 
 /* Column must be relative so the BYE match can be absolutely positioned */
@@ -470,6 +471,8 @@
   display: none;
 }
 
+=======
+>>>>>>> 1abe4e4d5bb3199abc0bdc541747bcc5a06d15a1
 /* ─── BYE slot ────────────────────────────────────────────────────────────── */
 
 .tb-container .team.tb-bye {

@@ -364,6 +364,7 @@
 			serialize();
 		});
 
+<<<<<<< HEAD
 		// Toggle "center in column" on a match
 		$(document).on('change', '.tb-center-toggle', function () {
 			var rIndex = parseInt($(this).data('round'), 10);
@@ -372,6 +373,8 @@
 			serialize();
 		});
 
+=======
+>>>>>>> 1abe4e4d5bb3199abc0bdc541747bcc5a06d15a1
 		// Toggle BYE on a team slot
 		$(document).on('change', '.tb-bye-toggle', function () {
 			var rIndex    = parseInt($(this).data('round'), 10);
