@@ -147,6 +147,29 @@
   margin: 6px 0 10px;
 }
 
+.tb-opt-center-label {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+}
+
+.tb-bye-label {
+  font-size: 12px;
+  color: #c8960a;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.tb-team-row.is-bye .tb-field {
+  opacity: 0.35;
+  pointer-events: none;
+}
+
 @media screen and (max-width: 600px) {
   .tb-team-row {
     flex-wrap: wrap;

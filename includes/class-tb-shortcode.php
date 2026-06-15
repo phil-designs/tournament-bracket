@@ -68,10 +68,14 @@ class TB_Shortcode {
 					<div class="bracket disable-image">
 
 						<?php foreach ( $rounds as $col_index => $matches ) :
-							// Only mark the final round when a champion has been selected,
-							// so the outgoing connector has somewhere to point.
-							$is_final  = ( $col_index === $last_col_index ) && ( null !== $champion );
-							$col_class = 'column' . ( $is_final ? ' tb-final-round' : '' );
+							$is_final   = ( $col_index === $last_col_index ) && ( null !== $champion );
+							$has_center = false;
+							foreach ( $matches as $_m ) {
+								if ( ! empty( $_m['centered'] ) ) { $has_center = true; break; }
+							}
+							$col_class = 'column'
+								. ( $is_final   ? ' tb-final-round'   : '' )
+								. ( $has_center ? ' tb-col-center-bye' : '' );
 						?>
 							<div class="<?php echo esc_attr( $col_class ); ?>">
 								<?php foreach ( $matches as $match ) :
@@ -89,26 +93,43 @@ class TB_Shortcode {
 											$match_style = ' style="border-left: 4px solid ' . esc_attr( $color ) . '"';
 										}
 									}
+									$is_centered   = ! empty( $match['centered'] );
+									$match_classes = trim( 'match'
+										. ( $winner_class ? ' ' . $winner_class : '' )
+										. ( $is_centered  ? ' tb-match-center' : '' )
+									);
 								?>
-									<div class="match <?php echo esc_attr( $winner_class ); ?>"<?php echo $match_style; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
+									<div class="<?php echo esc_attr( $match_classes ); ?>"<?php echo $match_style; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
 										<?php if ( ! empty( $match['header'] ) ) : ?>
 											<div class="match-header"><?php echo esc_html( $match['header'] ); ?></div>
 										<?php endif; ?>
-										<div class="match-top team">
-											<span class="image"></span>
-											<?php if ( ! empty( $top['seed'] ) ) : ?>
-												<span class="seed"><?php echo esc_html( $top['seed'] ); ?></span>
+										<?php
+									$top_bye    = ! empty( $top['bye'] );
+									$bottom_bye = ! empty( $bottom['bye'] );
+									?>
+										<div class="match-top team<?php echo $top_bye ? ' tb-bye' : ''; ?>">
+											<?php if ( $top_bye ) : ?>
+												<span class="name"><?php esc_html_e( 'BYE WEEK', 'tournament-bracket' ); ?></span>
+											<?php else : ?>
+												<span class="image"></span>
+												<?php if ( ! empty( $top['seed'] ) ) : ?>
+													<span class="seed"><?php echo esc_html( $top['seed'] ); ?></span>
+												<?php endif; ?>
+												<span class="name"><?php echo esc_html( $top['name'] ?? '' ); ?></span>
+												<span class="score"><?php echo esc_html( $top['score'] ?? '' ); ?></span>
 											<?php endif; ?>
-											<span class="name"><?php echo esc_html( $top['name'] ?? '' ); ?></span>
-											<span class="score"><?php echo esc_html( $top['score'] ?? '' ); ?></span>
 										</div>
-										<div class="match-bottom team">
-											<span class="image"></span>
-											<?php if ( ! empty( $bottom['seed'] ) ) : ?>
-												<span class="seed"><?php echo esc_html( $bottom['seed'] ); ?></span>
+										<div class="match-bottom team<?php echo $bottom_bye ? ' tb-bye' : ''; ?>">
+											<?php if ( $bottom_bye ) : ?>
+												<span class="name"><?php esc_html_e( 'BYE WEEK', 'tournament-bracket' ); ?></span>
+											<?php else : ?>
+												<span class="image"></span>
+												<?php if ( ! empty( $bottom['seed'] ) ) : ?>
+													<span class="seed"><?php echo esc_html( $bottom['seed'] ); ?></span>
+												<?php endif; ?>
+												<span class="name"><?php echo esc_html( $bottom['name'] ?? '' ); ?></span>
+												<span class="score"><?php echo esc_html( $bottom['score'] ?? '' ); ?></span>
 											<?php endif; ?>
-											<span class="name"><?php echo esc_html( $bottom['name'] ?? '' ); ?></span>
-											<span class="score"><?php echo esc_html( $bottom['score'] ?? '' ); ?></span>
 										</div>
 										<div class="match-lines">
 											<div class="line one"></div>
@@ -134,7 +155,8 @@ class TB_Shortcode {
 									<?php
 								$trophy_path = plugin_dir_path( dirname( __FILE__ ) ) . 'assets/images/trophy.svg';
 								if ( file_exists( $trophy_path ) ) {
-									echo file_get_contents( $trophy_path ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+									// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- SVG loaded from plugin's own assets directory.
+									include $trophy_path;
 								}
 								?>
 									<div class="tb-champion-info">

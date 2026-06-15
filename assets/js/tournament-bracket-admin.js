@@ -139,6 +139,20 @@
 		if (!hasColor) $colorPicker.prop('disabled', true);
 		$optRow.append($colorPicker);
 
+		$optRow.append(
+			$('<label>', { 'class': 'tb-opt-label tb-opt-center-label' })
+				.append(
+					$('<input>', {
+						type: 'checkbox',
+						'class': 'tb-center-toggle',
+						'data-round': rIndex,
+						'data-match': mIndex,
+						checked: !!match.centered
+					})
+				)
+				.append(' Center')
+		);
+
 		$match.append($optRow);
 
 		// Team rows
@@ -146,12 +160,13 @@
 			var team      = (match[side] && typeof match[side] === 'object' && !Array.isArray(match[side])) ? match[side] : {};
 			var sideLabel = side === 'top' ? 'Team A' : 'Team B';
 			var radioName = 'tb_winner_' + rIndex + '_' + mIndex;
+			var isBye     = !!team.bye;
 
 			if (sideIndex === 1) {
 				$match.append($('<div>', { 'class': 'tb-divider' }));
 			}
 
-			var $row = $('<div>', { 'class': 'tb-team-row' });
+			var $row = $('<div>', { 'class': 'tb-team-row' + ( isBye ? ' is-bye' : '' ) });
 
 			$row.append($('<span>', { 'class': 'tb-team-label', text: sideLabel }));
 
@@ -164,7 +179,8 @@
 					'data-match': mIndex,
 					'data-side': side,
 					'data-field': 'seed',
-					val: team.seed || ''
+					val: team.seed || '',
+					disabled: isBye
 				})
 			);
 
@@ -177,7 +193,8 @@
 					'data-match': mIndex,
 					'data-side': side,
 					'data-field': 'name',
-					val: team.name || ''
+					val: team.name || '',
+					disabled: isBye
 				})
 			);
 
@@ -190,7 +207,8 @@
 					'data-match': mIndex,
 					'data-side': side,
 					'data-field': 'score',
-					val: team.score || ''
+					val: team.score || '',
+					disabled: isBye
 				})
 			);
 
@@ -200,14 +218,30 @@
 				'class': 'tb-winner-radio',
 				'data-round': rIndex,
 				'data-match': mIndex,
-				'data-side': side
+				'data-side': side,
+				disabled: isBye
 			});
-			if (team.winner) $radio.prop('checked', true);
+			if (team.winner && !isBye) $radio.prop('checked', true);
 
 			$row.append(
 				$('<label>', { 'class': 'tb-winner-label' })
 					.append($radio)
 					.append(' Winner')
+			);
+
+			$row.append(
+				$('<label>', { 'class': 'tb-bye-label' })
+					.append(
+						$('<input>', {
+							type: 'checkbox',
+							'class': 'tb-bye-toggle',
+							'data-round': rIndex,
+							'data-match': mIndex,
+							'data-side': side,
+							checked: isBye
+						})
+					)
+					.append(' BYE')
 			);
 
 			$match.append($row);
@@ -328,6 +362,33 @@
 			}
 			$('input[name="tb_winner_' + rIndex + '_' + mIndex + '"]').prop('checked', false);
 			serialize();
+		});
+
+		// Toggle "center in column" on a match
+		$(document).on('change', '.tb-center-toggle', function () {
+			var rIndex = parseInt($(this).data('round'), 10);
+			var mIndex = parseInt($(this).data('match'), 10);
+			ensureMatch(rIndex, mIndex).centered = $(this).is(':checked');
+			serialize();
+		});
+
+		// Toggle BYE on a team slot
+		$(document).on('change', '.tb-bye-toggle', function () {
+			var rIndex    = parseInt($(this).data('round'), 10);
+			var mIndex    = parseInt($(this).data('match'), 10);
+			var side      = $(this).data('side');
+			var otherSide = side === 'top' ? 'bottom' : 'top';
+			var isBye     = $(this).is(':checked');
+			var team      = ensurePath(rIndex, mIndex, side);
+			var otherTeam = ensurePath(rIndex, mIndex, otherSide);
+
+			team.bye = isBye;
+			if (isBye) {
+				team.winner      = false;
+				otherTeam.winner = true;
+			}
+			serialize();
+			render();
 		});
 	});
 

@@ -447,6 +447,50 @@
   background: #505b69;
 }
 
+/* ─── Centered BYE column ─────────────────────────────────────────────────── */
+
+/* Column must be relative so the BYE match can be absolutely positioned */
+.tb-container .tb-col-center-bye {
+  position: relative;
+  justify-content: flex-start;
+}
+
+/* The centered BYE match is positioned by JS; hide its outgoing connector */
+.tb-container .tb-match-center .match-lines {
+  display: none !important;
+}
+
+/* Only 1 real match in normal flow — no vertical bar connector needed */
+.tb-container .tb-col-center-bye .match:not(.tb-match-center) .match-lines .line.two {
+  display: none;
+}
+
+/* Hide incoming (left-side) connectors from the previous round */
+.tb-container .tb-col-center-bye .match-lines.alt {
+  display: none;
+}
+
+/* ─── BYE slot ────────────────────────────────────────────────────────────── */
+
+.tb-container .team.tb-bye {
+  background: #f0c040 !important;
+  border-color: #c8960a !important;
+  color: #5a3d00 !important;
+  justify-content: center;
+  font-weight: 700;
+}
+
+.tb-container .team.tb-bye .image,
+.tb-container .team.tb-bye .seed,
+.tb-container .team.tb-bye .score {
+  display: none !important;
+}
+
+.tb-container .team.tb-bye .name {
+  padding-left: 0;
+  text-align: center;
+}
+
 /* ─── Empty state ─────────────────────────────────────────────────────────── */
 
 .tb-container .tb-empty {
